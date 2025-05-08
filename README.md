@@ -11,6 +11,8 @@ in function main, create a t_memnode that will store all the allocated pointers.
 int main(void)
 {
     t_memnode *memlist;
+    memlist = NULL;
+    
     char *str = gc_malloc(sizeof(char) * 5, &memlist); // 
     if (str == NULL)
         gc_exit(1, &memlist);
@@ -21,7 +23,7 @@ int main(void)
 ```
 
 
-for functions that allocate memory themselves, you must manually add the pointer(s) to the t_memnode:
+For functions that allocate memory themselves, you must manually add the pointer(s) to the t_memnode, we can add single or double pointers:
 
 ```c
 #includde <string.h>
@@ -30,15 +32,17 @@ for functions that allocate memory themselves, you must manually add the pointer
 int main(void)
 {
     t_memnode *memlist;
+    memlist = NULL;
+
     char *str = strdup("hello world");
     if (str == NULL)
         gc_exit(1, &memlist);
-    gc_add_allocd_ptr((void*)str, &memlist);
+    gc_add_ptr((void*)str, &memlist);
 
     char **double_ptr = some_fn_that_returns_double_ptr();
     if (double_ptr == NULL)
         gc_exit(1, &memlist);
-    gc_add_allocd_dbl_ptr((void **)double_ptr, &memlist);
+    gc_add_dbl_ptr((void **)double_ptr, &memlist);
 
     gc_return(0, memlist);
 }
