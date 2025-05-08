@@ -32,12 +32,12 @@ int main(void)
     char *str = strdup("hello world");
     if (str == NULL)
         gc_exit(1, &memlist);
-    gc_add_allocd_ptr(str, &memlist);
+    gc_add_allocd_ptr((void*)str, &memlist);
 
     char **double_ptr = some_fn_that_returns_double_ptr();
     if (double_ptr == NULL)
         gc_exit(1, &memlist);
-    gc_add_allocd_dbl_ptr(double_ptr, &memlist);
+    gc_add_allocd_dbl_ptr((void **)double_ptr, &memlist);
 
     gc_return(0, memlist);
 }
