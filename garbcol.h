@@ -5,15 +5,18 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+/* # define malloc(x) 0 */
+
 typedef struct s_memnode
 {
 	void				*memptr;
 	struct s_memnode	*next;
 }						t_memnode;
 
-void					add_allocd_ptr(t_memnode **root, void *memptr);
+int add_allocd_ptr(t_memnode **root, void *memptr);
 void					*gc_malloc(int nbytes, t_memnode **memlist);
 void					free_llist(t_memnode **root);
-void					gc_exit(int errcode, t_memnode *memlist);
 void					gc_free(t_memnode **root);
+void					gc_exit(int status, t_memnode **memlist);
+int	gc_return(int retvalue, t_memnode **memlist);
 #endif // GARBCOL_H

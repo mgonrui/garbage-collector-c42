@@ -1,6 +1,6 @@
 #include "garbcol.h"
 
-void	add_allocd_ptr(t_memnode **root, void *memptr)
+int add_allocd_ptr(t_memnode **root, void *memptr)
 {
 	t_memnode	*new_node;
 	t_memnode	*current_memnode;
@@ -9,20 +9,21 @@ void	add_allocd_ptr(t_memnode **root, void *memptr)
 	{
 		*root = malloc(sizeof(t_memnode));
 		if (*root == NULL)
-			exit(1);
+			return 1;
 		(*root)->memptr = memptr;
 		(*root)->next = NULL;
-		return ;
+		return 0;
 	}
 	new_node = malloc(sizeof(t_memnode));
 	if (new_node == NULL)
-		exit(1);
+		return 1;
 	new_node->memptr = memptr;
 	new_node->next = NULL;
 	current_memnode = *root;
 	while (current_memnode->next != NULL)
 		current_memnode = current_memnode->next;
 	current_memnode->next = new_node;
+	return 0;
 }
 
 void	*gc_malloc(int nbytes, t_memnode **memlist)
@@ -30,7 +31,13 @@ void	*gc_malloc(int nbytes, t_memnode **memlist)
 	void	*allocd_ptr;
 
 	allocd_ptr = malloc(nbytes);
-	add_allocd_ptr(memlist, allocd_ptr);
+	if (allocd_ptr == NULL)
+		return NULL;
+	if (add_allocd_ptr(memlist, allocd_ptr) == 1)
+	{
+		free(allocd_ptr);
+		return NULL;
+	}
 	return (allocd_ptr);
 }
 
@@ -53,14 +60,14 @@ void	gc_free(t_memnode **root)
 	return ;
 }
 
-void	gc_exit(int errcode, t_memnode *memlist)
+void	gc_exit(int status, t_memnode **memlist)
 {
-	gc_free(&memlist);
-	exit(errcode);
+	gc_free(memlist);
+	exit(status);
 }
 
-int	gc_return(int retvalue, t_memnode *memlist)
+int	gc_return(int retvalue, t_memnode **memlist)
 {
-	gc_free(&memlist);
+	gc_free(memlist);
 	return (retvalue);
 }

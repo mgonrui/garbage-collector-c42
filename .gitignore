@@ -1,3 +1,5 @@
 vgcore.*
 a.out
 *.o
+maintest.c
+*.h.gch

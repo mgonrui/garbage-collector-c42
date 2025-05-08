@@ -1,1 +1,1 @@
-dead simple "garbage collector" made for 42 school projects
+dead simple "garbage collector" made for c 42 school projects
