@@ -1,5 +1,6 @@
+# What it is
 A rudimentary "garbage collector" made for c 42 school projects.
-It does (almost) automatic freeing, youll still have to do manual allocs :(
+It does (almost) automatic freeing, you'll still have to do manual allocs :(
 
 # How does it work
 
