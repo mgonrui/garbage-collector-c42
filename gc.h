@@ -13,8 +13,8 @@ typedef struct s_memnode
 	struct s_memnode	*next;
 }						t_memnode;
 
-int						gc_add_allocd_ptr(t_memnode **root, void *memptr);
-int						gc_add_allocd_dbl_ptr(t_memnode **root, void **dblptr);
+int						gc_add_allocd_ptr(void *memptr,  t_memnode **root);
+int						gc_add_allocd_dbl_ptr(void **dblptr, t_memnode **root);
 void					gc_run(t_memnode **root);
 void					*gc_malloc(int nbytes, t_memnode **memlist);
 void					gc_exit(int status, t_memnode **memlist);

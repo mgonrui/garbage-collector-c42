@@ -1,6 +1,6 @@
 #include "gc.h"
 
-int	gc_add_allocd_dbl_ptr(t_memnode **root, void **dblptr)
+int gc_add_allocd_dbl_ptr(void **dblptr, t_memnode **root)
 {
 	t_memnode	*new_node;
 	t_memnode	*current_memnode;
@@ -28,7 +28,7 @@ int	gc_add_allocd_dbl_ptr(t_memnode **root, void **dblptr)
 	return (0);
 }
 
-int	gc_add_allocd_ptr(t_memnode **root, void *memptr)
+int						gc_add_allocd_ptr(void *memptr,  t_memnode **root)
 {
 	t_memnode	*new_node;
 	t_memnode	*current_memnode;
