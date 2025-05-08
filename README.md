@@ -16,7 +16,7 @@ int main(void)
     t_memnode *memlist;
     memlist = NULL;
     
-    char *str = gc_malloc(sizeof(char) * 5, &memlist); // 
+    char *str = gc_malloc(sizeof(char) * 5, &memlist); 
     if (str == NULL)
         gc_exit(1, &memlist);
     str = "hello";
@@ -40,7 +40,7 @@ int main(void)
     char *str = strdup("hello world");
     if (str == NULL)
         gc_exit(1, &memlist);
-    gc_add_ptr((void*)str, &memlist); // assign pointer to str inside t_memnode to later free it with gc_return
+    gc_add_ptr((void*)str, &memlist); // assign ptr to str inside memlist to later free it with gc_return
 
     char **double_ptr = some_fn_that_returns_double_ptr();
     if (double_ptr == NULL)
