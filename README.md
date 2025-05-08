@@ -4,7 +4,10 @@ It does (almost) automatic freeing, you'll still have to do manual allocs :(
 
 # How does it work
 
-in function main, create a t_memnode that will store all the allocated pointers. allocate memory with gc_malloc passing the size and the t_memnode address, return wit the gc_return or exit with gc_exit in the same way.
+In the start of the program, we will create a struct pointer that will serve as a linked list that will contain pointers to all the dynamically allocated variables. At the end of the program we will deallocate the list with gc_return() and gc_exit(). The wrapper gc_malloc() will function as a malloc that will automatically assign a new pointer in the list to the allocated memory. If we use a function that dinamically allocates memory by itself in a variable, we can add to the list a pointer to the variable with gc_add_ptr() and gc_add_dbl_ptr() so they can too be deallocated automatically. 
+
+# How to use it
+in function main, create a t_memnode that will store all the allocated pointers. allocate memory with gc_malloc passing the size and the t_memnode address, return with the gc_return or exit with gc_exit in the same way.
 ```c
 #include "gc.h"
 
