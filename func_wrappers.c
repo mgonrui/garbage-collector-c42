@@ -7,7 +7,7 @@ void	*gc_malloc(int nbytes, t_memnode **memlist)
 	allocd_ptr = malloc(nbytes);
 	if (allocd_ptr == NULL)
 		return (NULL);
-	if (gc_add_allocd_ptr(memlist, allocd_ptr) == 1)
+	if (gc_add_ptr(allocd_ptr, memlist) == 1)
 	{
 		free(allocd_ptr);
 		return (NULL);
