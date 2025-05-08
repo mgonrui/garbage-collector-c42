@@ -17,12 +17,12 @@ void	*gc_malloc(int nbytes, t_memnode **memlist)
 
 void	gc_exit(int status, t_memnode **memlist)
 {
-	gc_free(memlist);
+	gc_run(memlist);
 	exit(status);
 }
 
 int	gc_return(int retvalue, t_memnode **memlist)
 {
-	gc_free(memlist);
+	gc_run(memlist);
 	return (retvalue);
 }

@@ -56,7 +56,7 @@ int	gc_add_allocd_ptr(t_memnode **root, void *memptr)
 	return (0);
 }
 
-void	gc_free(t_memnode **root)
+void	gc_run(t_memnode **root)
 {
 	t_memnode	*current;
 	t_memnode	*prev;
