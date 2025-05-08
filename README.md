@@ -29,7 +29,7 @@ int main(void)
 For functions that allocate memory themselves, you must manually add the pointer(s) to the t_memnode, we can add single or double pointers:
 
 ```c
-#includde <string.h>
+#include <string.h>
 #include "gc.h"
 
 int main(void)
@@ -47,7 +47,7 @@ int main(void)
         gc_exit(1, &memlist);
     gc_add_dbl_ptr((void **)double_ptr, &memlist);
 
-    gc_return(0, memlist);
+    gc_return(0, &memlist);
 }
 ```
 
