@@ -69,7 +69,7 @@ void	gc_run(t_memnode **root)
 	{
 		prev = current;
 		current = current->next;
-		if (prev->isdouble)
+		if (prev->isdouble == true)
 		{
 			i = 0;
 			while (prev->dblptr[i] != NULL)
